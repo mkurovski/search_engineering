@@ -17,7 +17,7 @@ from time import perf_counter
 import concurrent.futures
 
 logger = logging.getLogger(__name__)
-logger.setLevel(logging.INFO)
+logger.setLevel(logging.DEBUG)
 logging.basicConfig(format='%(levelname)s:%(message)s')
 
 # NOTE: this is not a complete list of fields.  If you wish to add more, put in the appropriate XPath expression.
@@ -29,114 +29,110 @@ mappings = {
     "type":"type/text()",
     "shortDescription": "shortDescription/text()",
     "startDate": "startDate/text()",
-"active": "active/text()",
-"regularPrice": "regularPrice/text()",
-"salePrice": "salePrice/text()",
-"shortDescription": "shortDescription/text()",
-"shortDescriptionHtml": "shortDescriptionHtml/text()",
-"longDescription": "longDescription/text()",
-"longDescriptionHtml": "longDescriptionHtml/text()",
-"artistName": "artistName/text()",
-"onSale": "onSale/text()",
-"digital": "digital/text()",
-"frequentlyPurchasedWith": "frequentlyPurchasedWith/*/text()",  # Note the match all here to get the subfields
-"accessories": "accessories/*/text()" ,  # Note the match all here to get the subfields
-"relatedProducts": "relatedProducts/*/text()",  # Note the match all here to get the subfields
-"crossSell": "crossSell/text()",
-"salesRankShortTerm": "salesRankShortTerm/text()",
-"salesRankMediumTerm": "salesRankMediumTerm/text()",
-"salesRankLongTerm": "salesRankLongTerm/text()",
-"bestSellingRank": "bestSellingRank/text()",
-"url": "url/text()",
-"categoryPath": "categoryPath/*/name/text()",  # Note the match all here to get the subfields
-"categoryPathIds": "categoryPath/*/id/text()",  # Note the match all here to get the subfields
-"categoryLeaf": "categoryPath/category[last()]/id/text()",
-"categoryPathCount": "count(categoryPath/*/name)",
-"customerReviewCount": "customerReviewCount/text()",
-"customerReviewAverage": "customerReviewAverage/text()",
-"inStoreAvailability": "inStoreAvailability/text()",
-"onlineAvailability": "onlineAvailability/text()",
-"releaseDate": "releaseDate/text()",
-"shippingCost": "shippingCost/text()",
-"class": "class/text()",
-"classId": "classId/text()",
-"subclass": "subclass/text()",
-"subclassId": "subclassId/text()",
-"department": "department/text()",
-"departmentId": "departmentId/text()",
-"bestBuyItemId": "bestBuyItemId/text()",
-"description": "description/text()",
-"manufacturer": "manufacturer/text()",
-"modelNumber": "modelNumber/text()",
-"image": "image/text()",
-"condition": "condition/text()",
-"inStorePickup": "inStorePickup/text()",
-"homeDelivery": "homeDelivery/text()",
-"quantityLimit": "quantityLimit/text()",
-"color": "color/text()",
-"depth": "depth/text()",
-"height": "height/text()",
-"weight": "weight/text()",
-"shippingWeight": "shippingWeight/text()",
-"width": "width/text()",
-"features": "features/*/text()"  # Note the match all here to get the subfields
-
+    "active": "active/text()",
+    "regularPrice": "regularPrice/text()",
+    "salePrice": "salePrice/text()",
+    "shortDescription": "shortDescription/text()",
+    "shortDescriptionHtml": "shortDescriptionHtml/text()",
+    "longDescription": "longDescription/text()",
+    "longDescriptionHtml": "longDescriptionHtml/text()",
+    "artistName": "artistName/text()",
+    "onSale": "onSale/text()",
+    "digital": "digital/text()",
+    "frequentlyPurchasedWith": "frequentlyPurchasedWith/*/text()",  # Note the match all here to get the subfields
+    "accessories": "accessories/*/text()" ,  # Note the match all here to get the subfields
+    "relatedProducts": "relatedProducts/*/text()",  # Note the match all here to get the subfields
+    "crossSell": "crossSell/text()",
+    "salesRankShortTerm": "salesRankShortTerm/text()",
+    "salesRankMediumTerm": "salesRankMediumTerm/text()",
+    "salesRankLongTerm": "salesRankLongTerm/text()",
+    "bestSellingRank": "bestSellingRank/text()",
+    "url": "url/text()",
+    "categoryPath": "categoryPath/*/name/text()",  # Note the match all here to get the subfields
+    "categoryPathIds": "categoryPath/*/id/text()",  # Note the match all here to get the subfields
+    "categoryLeaf": "categoryPath/category[last()]/id/text()",
+    "categoryPathCount": "count(categoryPath/*/name)",
+    "customerReviewCount": "customerReviewCount/text()",
+    "customerReviewAverage": "customerReviewAverage/text()",
+    "inStoreAvailability": "inStoreAvailability/text()",
+    "onlineAvailability": "onlineAvailability/text()",
+    "releaseDate": "releaseDate/text()",
+    "shippingCost": "shippingCost/text()",
+    "class": "class/text()",
+    "classId": "classId/text()",
+    "subclass": "subclass/text()",
+    "subclassId": "subclassId/text()",
+    "department": "department/text()",
+    "departmentId": "departmentId/text()",
+    "bestBuyItemId": "bestBuyItemId/text()",
+    "description": "description/text()",
+    "manufacturer": "manufacturer/text()",
+    "modelNumber": "modelNumber/text()",
+    "image": "image/text()",
+    "condition": "condition/text()",
+    "inStorePickup": "inStorePickup/text()",
+    "homeDelivery": "homeDelivery/text()",
+    "quantityLimit": "quantityLimit/text()",
+    "color": "color/text()",
+    "depth": "depth/text()",
+    "height": "height/text()",
+    "weight": "weight/text()",
+    "shippingWeight": "shippingWeight/text()",
+    "width": "width/text()",
+    "features": "features/*/text()",  # Note the match all here to get the subfields
+    "startDate": "startDate/text()",
+    "active": "active/text()",
+    "regularPrice": "regularPrice/text()",
+    "salePrice": "salePrice/text()",
+    "shortDescription": "shortDescription/text()",
+    "shortDescriptionHtml": "shortDescriptionHtml/text()",
+    "longDescription": "longDescription/text()",
+    "longDescriptionHtml": "longDescriptionHtml/text()",
+    "artistName": "artistName/text()",
+    "onSale": "onSale/text()",
+    "digital": "digital/text()",
+    "frequentlyPurchasedWith": "frequentlyPurchasedWith/*/text()",  # Note the match all here to get the subfields
+    "accessories": "accessories/*/text()" ,  # Note the match all here to get the subfields
+    "relatedProducts": "relatedProducts/*/text()",  # Note the match all here to get the subfields
+    "crossSell": "crossSell/text()",
+    "salesRankShortTerm": "salesRankShortTerm/text()",
+    "salesRankMediumTerm": "salesRankMediumTerm/text()",
+    "salesRankLongTerm": "salesRankLongTerm/text()",
+    "bestSellingRank": "bestSellingRank/text()",
+    "url": "url/text()",
+    "categoryPath": "categoryPath/*/name/text()",  # Note the match all here to get the subfields
+    "categoryPathIds": "categoryPath/*/id/text()",  # Note the match all here to get the subfields
+    "categoryLeaf": "categoryPath/category[last()]/id/text()",
+    "categoryPathCount": "count(categoryPath/*/name)",
+    "customerReviewCount": "customerReviewCount/text()",
+    "customerReviewAverage": "customerReviewAverage/text()",
+    "inStoreAvailability": "inStoreAvailability/text()",
+    "onlineAvailability": "onlineAvailability/text()",
+    "releaseDate": "releaseDate/text()",
+    "shippingCost": "shippingCost/text()",
+    "class": "class/text()",
+    "classId": "classId/text()",
+    "subclass": "subclass/text()",
+    "subclassId": "subclassId/text()",
+    "department": "department/text()",
+    "departmentId": "departmentId/text()",
+    "bestBuyItemId": "bestBuyItemId/text()",
+    "description": "description/text()",
+    "manufacturer": "manufacturer/text()",
+    "modelNumber": "modelNumber/text()",
+    "image": "image/text()",
+    "condition": "condition/text()",
+    "inStorePickup": "inStorePickup/text()",
+    "homeDelivery": "homeDelivery/text()",
+    "quantityLimit": "quantityLimit/text()",
+    "color": "color/text()",
+    "depth": "depth/text()",
+    "height": "height/text()",
+    "weight": "weight/text()",
+    "shippingWeight": "shippingWeight/text()",
+    "width": "width/text()",
+    "features": "features/*/text()"  # Note the match all here to get the subfields
 }
-'''
-"startDate": "startDate/text()",
-"active": "active/text()",
-"regularPrice": "regularPrice/text()",
-"salePrice": "salePrice/text()",
-"shortDescription": "shortDescription/text()",
-"shortDescriptionHtml": "shortDescriptionHtml/text()",
-"longDescription": "longDescription/text()",
-"longDescriptionHtml": "longDescriptionHtml/text()",
-"artistName": "artistName/text()",
-"onSale": "onSale/text()",
-"digital": "digital/text()",
-"frequentlyPurchasedWith": "frequentlyPurchasedWith/*/text()",  # Note the match all here to get the subfields
-"accessories": "accessories/*/text()" ,  # Note the match all here to get the subfields
-"relatedProducts": "relatedProducts/*/text()",  # Note the match all here to get the subfields
-"crossSell": "crossSell/text()",
-"salesRankShortTerm": "salesRankShortTerm/text()",
-"salesRankMediumTerm": "salesRankMediumTerm/text()",
-"salesRankLongTerm": "salesRankLongTerm/text()",
-"bestSellingRank": "bestSellingRank/text()",
-"url": "url/text()",
-"categoryPath": "categoryPath/*/name/text()",  # Note the match all here to get the subfields
-"categoryPathIds": "categoryPath/*/id/text()",  # Note the match all here to get the subfields
-"categoryLeaf": "categoryPath/category[last()]/id/text()",
-"categoryPathCount": "count(categoryPath/*/name)",
-"customerReviewCount": "customerReviewCount/text()",
-"customerReviewAverage": "customerReviewAverage/text()",
-"inStoreAvailability": "inStoreAvailability/text()",
-"onlineAvailability": "onlineAvailability/text()",
-"releaseDate": "releaseDate/text()",
-"shippingCost": "shippingCost/text()",
-"class": "class/text()",
-"classId": "classId/text()",
-"subclass": "subclass/text()",
-"subclassId": "subclassId/text()",
-"department": "department/text()",
-"departmentId": "departmentId/text()",
-"bestBuyItemId": "bestBuyItemId/text()",
-"description": "description/text()",
-"manufacturer": "manufacturer/text()",
-"modelNumber": "modelNumber/text()",
-"image": "image/text()",
-"condition": "condition/text()",
-"inStorePickup": "inStorePickup/text()",
-"homeDelivery": "homeDelivery/text()",
-"quantityLimit": "quantityLimit/text()",
-"color": "color/text()",
-"depth": "depth/text()",
-"height": "height/text()",
-"weight": "weight/text()",
-"shippingWeight": "shippingWeight/text()",
-"width": "width/text()",
-"features": "features/*/text()"  # Note the match all here to get the subfields
-
-'''
 
 def get_opensearch(the_host="localhost"):
     host = the_host
@@ -204,7 +200,7 @@ def index_file(file, index_name, host="localhost", max_docs=2000000, batch_size=
 @click.option('--host', '-o', default="localhost", help="The name of the host running OpenSearch")
 @click.option('--max_docs', '-m', default=200000, help="The maximum number of docs to be indexed PER WORKER PER FILE.")
 @click.option('--batch_size', '-b', default=200, help="The number of docs to send per request. Max of 5000")
-@click.option('--refresh_interval', '-r', default="-1", help="The number of docs to send per request. Max of 5000")
+@click.option('--refresh_interval', '-r', default="-1", help="How often refresh operation is performed, -1 to disable")
 def main(source_dir: str, file_glob: str, index_name: str, workers: int, host: str, max_docs: int, batch_size: int, refresh_interval: str):
     batch_size = min(batch_size, 5000)  # I believe this is the default max batch size, but need to find docs on that
     logger.info(
@@ -215,6 +211,7 @@ def main(source_dir: str, file_glob: str, index_name: str, workers: int, host: s
     client = get_opensearch(host)
 
     #TODO: set the refresh interval
+    client.indices.put_settings(index=index_name, body={"refresh_interval": refresh_interval})
     logger.debug(client.indices.get_settings(index=index_name))
     start = perf_counter()
     time_indexing = 0
@@ -228,6 +225,7 @@ def main(source_dir: str, file_glob: str, index_name: str, workers: int, host: s
     finish = perf_counter()
     logger.info(f'Done. {docs_indexed} were indexed in {(finish - start)/60} minutes.  Total accumulated time spent in `bulk` indexing: {time_indexing/60} minutes')
     # TODO set refresh interval back to 5s
+    client.indices.put_settings(index=index_name, body={"refresh_interval": "5s"})
     logger.debug(client.indices.get_settings(index=index_name))
 
 if __name__ == "__main__":
